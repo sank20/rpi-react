@@ -14,7 +14,7 @@ class DeleteButton extends Component {
       newUpload: props.newUpload,
     };
   }
-// TODO: Update the dropdown list after file delete success
+
 // TODO: Clear all warnings, use recommended stuff
   baseUrl = "http://192.168.0.42:8000";
   getAllFiles = () => {
@@ -63,6 +63,7 @@ class DeleteButton extends Component {
           deleteLabel: "Select file to delete ->",
         });
         alert("File deleted successfully");
+        populateFiles(this);
       })
       .catch((err) => {
         console.log(err);
