@@ -7,6 +7,9 @@ import Button from "react-bootstrap/Button";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlay, faStop, faPause } from "@fortawesome/free-solid-svg-icons";
+import Form from "react-bootstrap/Form";
+import Table from "react-bootstrap/Table";
+
 class App extends Component {
   state = {
     fileDropDownList: [],
@@ -16,7 +19,7 @@ class App extends Component {
     volume: 50,
     playStatus: "stopped",
   };
-  //   TODO: Add progress dialog for upload
+
   deleteButtonLabel = "Select file to delete ->";
   // fileList = [];
   // fileDropDownList = [];
@@ -180,98 +183,131 @@ class App extends Component {
     return (
       <div className="App">
         <h1>MMB Tester</h1>
-        <ol>
-          <li>
-            Music:
-            {/* <button type="button" onClick={this.playMusic}>
-              Play
-            </button>
-            <button type="button" onClick={this.stopMusic}>
-              Stop
-            </button>
-            <button type="button" onClick={this.pauseMusic}>
-              Pause
-            </button> */}
-            <ButtonGroup
-            // type="checkbox"
-            // value={value}
-            // onChange={this.handlePlayback}
-            >
-              <Button
-                value={"play"}
-                onClick={
-                  this.state.playStatus == "stopped"
-                    ? this.playMusic
-                    : this.pauseMusic
-                }
-              >
-                {this.state.playStatus == "stopped" ||
-                this.state.playStatus == "paused" ? (
-                  <FontAwesomeIcon icon={faPlay} />
-                ) : (
-                  <FontAwesomeIcon icon={faPause} />
-                )}
-              </Button>
-              <Button value={"stop"} onClick={this.stopMusic}>
-                <FontAwesomeIcon icon={faStop} />
-              </Button>
-              {/* <ToggleButton value={3}>Option 3</ToggleButton> */}
-            </ButtonGroup>
-            <br />
-            Volume:
-            <input
-              type="range"
-              min="1"
-              max="100"
-              // value="100"
-              className="slider"
-              id="myRange"
-              onChange={this.setVolume}
-            />
-            <span>{this.state.volume}%</span>
-          </li>
-          <li>
-            Update Music File:
-            <input
+        <Form>
+          <Table striped bordered>
+            <tbody>
+              <tr>
+                <Form.Group controlId="music">
+                  <td>
+                    <Form.Label>Music:</Form.Label>
+                  </td>
+                  <td>
+                    <ButtonGroup>
+                      <Button
+                        value={"play"}
+                        onClick={
+                          this.state.playStatus == "stopped"
+                            ? this.playMusic
+                            : this.pauseMusic
+                        }
+                      >
+                        {this.state.playStatus == "stopped" ||
+                        this.state.playStatus == "paused" ? (
+                          <FontAwesomeIcon icon={faPlay} />
+                        ) : (
+                          <FontAwesomeIcon icon={faPause} />
+                        )}
+                      </Button>
+                      <Button value={"stop"} onClick={this.stopMusic}>
+                        <FontAwesomeIcon icon={faStop} />
+                      </Button>
+                      {/* <ToggleButton value={3}>Option 3</ToggleButton> */}
+                    </ButtonGroup>
+                  </td>
+                  <tr>
+                    <td>
+                      <Form.Label>Volume:</Form.Label>
+                    </td>
+                    <td>
+                      <input
+                        type="range"
+                        min="1"
+                        max="100"
+                        // value="100"
+                        className="slider"
+                        id="myRange"
+                        onChange={this.setVolume}
+                      />
+                      <span>{this.state.volume}%</span>
+                    </td>
+                  </tr>
+                </Form.Group>
+              </tr>
+              <tr>
+                <Form.Group>
+                  <Form.Label>Update Music File:</Form.Label>
+                  {/* <input
               type="file"
               id="file_input"
               onChange={this.uploadFile}
-            ></input>
-            <span className={this.state.uploadStart == false ? "hidden" : ""}>
-              <Spinner animation="border" role="status">
-                <span className="sr-only">Loading...</span>
-              </Spinner>
-              <b>Uploading...</b>
-            </span>
-          </li>
-          <li>
-            Delete Music File:
-            <DeleteButton newUpload={this.state.newUpload} />
-          </li>
-          <li>
-            LED Strip:
-            <input className="tgl tgl-light" id="cb1" type="checkbox" />
-            <label className="tgl-btn"></label>
-          </li>
-          <li>
-            Movement (dance) :
-            <input className="tgl tgl-light" id="cb1" type="checkbox" />
-          </li>
-          <li>
-            Mystery Box (ring):
-            <input className="tgl tgl-light" id="cb1" type="checkbox" />
-          </li>
-          <li>
-            Trigger Spell:
-            <button type="button">Locomotor</button>
-            <button type="button">Arresto Momentum</button>
-            <button type="button">Revelio</button>
-          </li>
-          <li>Camera View</li>
-          {/* Add component here */}
-          <li>Wand movement view:</li>
-          {/* Add component here */}
-        </ol>
+            ></input> */}
+                  <Form.File
+                    id="file_input"
+                    label="Select file top upload"
+                    onChange={this.uploadFile}
+                  />
+                  <span
+                    className={this.state.uploadStart == false ? "hidden" : ""}
+                  >
+                    <Spinner animation="border" role="status">
+                      <span className="sr-only">Loading...</span>
+                    </Spinner>
+                    <b>Uploading...</b>
+                  </span>
+                </Form.Group>
+              </tr>
+              <tr>
+                <Form.Group>
+                  <Form.Label>Delete Music File:</Form.Label>
+                  <DeleteButton newUpload={this.state.newUpload} />
+                </Form.Group>
+              </tr>
+              <tr>
+                <Form.Group>
+                  <Form.Label>LED Strip:</Form.Label>
+
+                  <input className="tgl tgl-light" id="cb1" type="checkbox" />
+                  <label className="tgl-btn"></label>
+                </Form.Group>
+              </tr>
+              <tr>
+                <Form.Group>
+                  <Form.Label>Movement (dance) :</Form.Label>
+                  <input className="tgl tgl-light" id="cb1" type="checkbox" />
+                </Form.Group>
+              </tr>
+              <tr>
+                <Form.Group>
+                  <Form.Label>Mystery Box (ring):</Form.Label>
+                  <input className="tgl tgl-light" id="cb1" type="checkbox" />
+                </Form.Group>
+              </tr>
+
+              <tr>
+                <Form.Group>
+                  <Form.Label>Trigger Spell:</Form.Label>
+                  <button type="button">Locomotor</button>
+                  <button type="button">Arresto Momentum</button>
+                  <button type="button">Revelio</button>
+                </Form.Group>
+              </tr>
+              <tr>
+                <Form.Group>
+                  <Form.Label>Camera View</Form.Label>
+
+                  {/* Add component here */}
+                </Form.Group>
+              </tr>
+              <tr>
+                <Form.Group>
+                  <Form.Label>Wand movement view:</Form.Label>
+
+                  {/* Add component here */}
+                </Form.Group>
+              </tr>
+            </tbody>
+          </Table>
+        </Form>
       </div>
     );
   }
