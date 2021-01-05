@@ -11,6 +11,7 @@ import Form from "react-bootstrap/Form";
 import Table from "react-bootstrap/Table";
 import Card from "react-bootstrap/Card";
 import ListGroup from "react-bootstrap/ListGroup";
+import bsCustomFileInput from "bs-custom-file-input";
 class App extends Component {
   state = {
     fileDropDownList: [],
@@ -170,16 +171,9 @@ class App extends Component {
       });
   };
 
-  // handlePlayback = (val) => {
-  //   console.log("toggle group pressed");
-  //   console.log(val[0]);
-  //   if (val[0] == "play") {
-  //     this.playMusic();
-  //   } else if (val[0] == "stop") {
-  //     this.stopMusic();
-  //   }
-  // };
-
+  componentDidMount() {
+    bsCustomFileInput.init();
+  }
   render() {
     return (
       <div className="App">
@@ -193,118 +187,142 @@ class App extends Component {
         </Card> */}
         <div className="card-parent">
           <Card className="main-card">
-            <Form>
-              <ListGroup variant="flush">
-                <ListGroup.Item>
-                  <Form.Group controlId="music">
-                    <Form.Label className='label'>Music:</Form.Label>
-                    <ButtonGroup>
-                      <Button
-                        value={"play"}
-                        onClick={
-                          this.state.playStatus == "stopped"
-                            ? this.playMusic
-                            : this.pauseMusic
-                        }
-                      >
-                        {this.state.playStatus == "stopped" ||
-                        this.state.playStatus == "paused" ? (
-                          <FontAwesomeIcon icon={faPlay} />
-                        ) : (
-                          <FontAwesomeIcon icon={faPause} />
-                        )}
-                      </Button>
-                      <Button value={"stop"} onClick={this.stopMusic}>
-                        <FontAwesomeIcon icon={faStop} />
-                      </Button>
-                      {/* <ToggleButton value={3}>Option 3</ToggleButton> */}
-                    </ButtonGroup>
-                  </Form.Group>
-                </ListGroup.Item>
-                <ListGroup.Item>
-                  <Form.Group>
-                    <Form.Label>Volume:</Form.Label>
-                    <input
-                      type="range"
-                      min="1"
-                      max="100"
-                      // value="100"
-                      className="slider"
-                      id="myRange"
-                      onChange={this.setVolume}
-                    />
-                    <span>{this.state.volume}%</span>
-                  </Form.Group>
-                </ListGroup.Item>
-                <ListGroup.Item>
-                  <Form.Group>                   
-                    <Form.File
-                      id="file_input"
-                      label="Update music file"
-                      onChange={this.uploadFile}
-                    />
-                    <span
-                      className={
-                        this.state.uploadStart == false ? "hidden" : ""
+            <Card.Body className="card-body">
+              <Form>
+                {/* <ListGroup variant='flush'> */}
+                {/* <ListGroup.Item> */}
+                <Form.Group controlId="music">
+                  <Form.Label className="label">Music:</Form.Label>
+                  <ButtonGroup>
+                    <Button
+                      variant="outline-warning"
+                      value={"play"}
+                      onClick={
+                        this.state.playStatus == "stopped"
+                          ? this.playMusic
+                          : this.pauseMusic
                       }
                     >
-                      <Spinner animation="border" role="status">
-                        <span className="sr-only">Loading...</span>
-                      </Spinner>
-                      <b>Uploading...</b>
-                    </span>
-                  </Form.Group>
-                </ListGroup.Item>
-                <ListGroup.Item>
-                  <Form.Group>
-                    <Form.Label>Delete Music File:</Form.Label>
-                    <DeleteButton newUpload={this.state.newUpload} />
-                  </Form.Group>
-                </ListGroup.Item>
-                <ListGroup.Item>
-                  <Form.Group>
-                    <Form.Label>LED Strip:</Form.Label>
+                      {this.state.playStatus == "stopped" ||
+                      this.state.playStatus == "paused" ? (
+                        <FontAwesomeIcon icon={faPlay} />
+                      ) : (
+                        <FontAwesomeIcon icon={faPause} />
+                      )}
+                    </Button>
+                    <Button
+                      variant="outline-warning"
+                      value={"stop"}
+                      onClick={this.stopMusic}
+                    >
+                      <FontAwesomeIcon icon={faStop} />
+                    </Button>
+                    {/* <ToggleButton value={3}>Option 3</ToggleButton> */}
+                  </ButtonGroup>
+                </Form.Group>
+                {/* </ListGroup.Item> */}
+                {/* <ListGroup.Item> */}
+                <Form.Group>
+                  <Form.Label>Volume:</Form.Label>
+                  <Form.Control
+                    type="range"
+                    custom
+                    min="1"
+                    max="100"
+                    // value="100"
+                    className="slider"
+                    id="myRange"
+                    onChange={this.setVolume}
+                  />
+                  {/* <input
+                        type="range"
+                        min="1"
+                        max="100"
+                        // value="100"
+                        className="slider"
+                        id="myRange"
+                        onChange={this.setVolume}
+                      /> */}
+                  <Form.Label>{this.state.volume} &nbsp; %</Form.Label>
+                </Form.Group>
+                {/* </ListGroup.Item> */}
+                {/* <ListGroup.Item> */}
+                <Form.Group>
+                  <Form.File
+                    id="file_input"
+                    label="Update music file"
+                    onChange={this.uploadFile}
+                    custom
+                    style={{ width: "50%" }}
+                  />
+                  <span
+                    className={this.state.uploadStart == false ? "hidden" : ""}
+                  >
+                    <Spinner animation="border" role="status">
+                      <Form.Label className="sr-only">Loading...</Form.Label>
+                    </Spinner>
+                    <b>Uploading...</b>
+                  </span>
+                </Form.Group>
+                {/* </ListGroup.Item> */}
+                {/* <ListGroup.Item> */}
+                <Form.Group>
+                  <Form.Label>Delete Music File:</Form.Label>
+                  <DeleteButton newUpload={this.state.newUpload} />
+                </Form.Group>
+                {/* </ListGroup.Item> */}
+                {/* <ListGroup.Item> */}
+                <Form.Group>
+                  <Form.Check
+                    type="switch"
+                    id="ledstrip-switch"
+                    label="LED Strip"
+                  />
+                </Form.Group>
+                {/* </ListGroup.Item> */}
+                {/* <ListGroup.Item> */}
+                <Form.Group>
+                  <Form.Check
+                    type="switch"
+                    id="dance-switch"
+                    label="Movement (dance)"
+                  />
+                </Form.Group>
+                {/* </ListGroup.Item> */}
+                {/* <ListGroup.Item> */}
+                <Form.Group>
+                  <Form.Check
+                    type="switch"
+                    id="ring-switch"
+                    label="Mystery Box (ring)"
+                  />
+                </Form.Group>
+                {/* </ListGroup.Item> */}
+                {/* <ListGroup.Item> */}
+                <Form.Group>
+                  <Form.Label>Trigger Spell:</Form.Label>
+                  <button type="button">Locomotor</button>
+                  <button type="button">Arresto Momentum</button>
+                  <button type="button">Revelio</button>
+                </Form.Group>
+                {/* </ListGroup.Item> */}
+                {/* <ListGroup.Item> */}
+                <Form.Group>
+                  <Form.Label>Camera View</Form.Label>
 
-                    <input className="tgl tgl-light" id="cb1" type="checkbox" />
-                    <label className="tgl-btn"></label>
-                  </Form.Group>
-                </ListGroup.Item>
-                <ListGroup.Item>
-                  <Form.Group>
-                    <Form.Label>Movement (dance) :</Form.Label>
-                    <input className="tgl tgl-light" id="cb1" type="checkbox" />
-                  </Form.Group>
-                </ListGroup.Item>
-                <ListGroup.Item>
-                  <Form.Group>
-                    <Form.Label>Mystery Box (ring):</Form.Label>
-                    <input className="tgl tgl-light" id="cb1" type="checkbox" />
-                  </Form.Group>
-                </ListGroup.Item>
-                <ListGroup.Item>
-                  <Form.Group>
-                    <Form.Label>Trigger Spell:</Form.Label>
-                    <button type="button">Locomotor</button>
-                    <button type="button">Arresto Momentum</button>
-                    <button type="button">Revelio</button>
-                  </Form.Group>
-                </ListGroup.Item>
-                <ListGroup.Item>
-                  <Form.Group>
-                    <Form.Label>Camera View</Form.Label>
+                  {/* <img src="http://192.168.0.42:8000/video/start_stream"></img> */}
+                </Form.Group>
+                {/* </ListGroup.Item> */}
+                {/* <ListGroup.Item> */}
+                <Form.Group>
+                  <Form.Label>Wand movement view:</Form.Label>
 
-                    {/* Add component here */}
-                  </Form.Group>
-                </ListGroup.Item>
-                <ListGroup.Item>
-                  <Form.Group>
-                    <Form.Label>Wand movement view:</Form.Label>
-
-                    {/* Add component here */}
-                  </Form.Group>
-                </ListGroup.Item>
-              </ListGroup>
-            </Form>
+                  {/* Add component here */}
+                </Form.Group>
+                {/* </ListGroup.Item> */}
+                {/* </ListGroup> */}
+              </Form>
+            </Card.Body>
           </Card>
         </div>
       </div>

@@ -76,11 +76,11 @@ class DeleteButton extends Component {
 
     return (
       <Dropdown as={ButtonGroup}>
-        <Button variant="danger" onClick={this.deleteFile}>
+        <Button variant="outline-danger" onClick={this.deleteFile}>
           {this.state.deleteLabel}{" "}
         </Button>
 
-        <Dropdown.Toggle split variant="danger" id="dropdown-split-basic" />
+        <Dropdown.Toggle split variant="outline-danger" id="dropdown-split-basic" />
 
         <Dropdown.Menu>{this.state.fileDropDownList}</Dropdown.Menu>
       </Dropdown>

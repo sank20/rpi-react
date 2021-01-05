@@ -1,10 +1,23 @@
+@font-face {
+  font-family: "Lumos";
+  font-style: normal;
+  src: local("Lumos"), url("./fonts/Lumoslatino-XA8K.ttf") format("truetype");
+  font-weight: normal;
+}
+@font-face {
+  font-family: "HarryP";
+  /* font-style: normal; */
+  src: local("HarryP"), url("./fonts/HarryP-MVZ6w.ttf") format("truetype");
+  /* font-weight: normal; */
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+  /* font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  -moz-osx-font-smoothing: grayscale; */
 }
 
 code {
@@ -24,12 +37,33 @@ code {
   width: 58rem;
   margin: auto;
 }
-h1{
+.card-body {
+  background-color: #222f5b;
+  border-radius: 5px;
+}
+.card-parent {
+  /* background-color: aqua; */
+}
+h1 {
+  font-family: "HarryP";
   text-align: center;
 }
-label{
+label {
+  font-size: larger;
+  font-weight: 800;
+  font-family: Lumos;
   padding: 2px 6px 2px 6px;
   margin: 0px 8px 0px 8px;
   font-weight: 500;
-  color:rgb(90, 90, 90);
+  color: #ffed80;
+}
+
+#myRange {
+  width: 50%;
+}
+.btn {
+  color: #740909;
+}
+.custom-file{
+  width: 50%;
 }

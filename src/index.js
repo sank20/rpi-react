@@ -4,6 +4,8 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './fonts/Lumoslatino-XA8K.ttf';
+import './fonts/HarryP-MVZ6w.ttf';
 ReactDOM.render(
   <React.StrictMode>
     <App />
