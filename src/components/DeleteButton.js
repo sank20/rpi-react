@@ -11,14 +11,14 @@ class DeleteButton extends Component {
       deleteLabel: "Select file to delete ->",
       fileDropDownList: [],
       deleteFileName: null,
-      newUpload: props.newUpload,
+      newUpload: props.newUpload,    
     };
   }
 
 // TODO: Clear all warnings, use recommended stuff
-  baseUrl = "http://192.168.0.42:8000";
+  // baseUrl = this.state.baseUrl;
   getAllFiles = () => {
-    let url = `${this.baseUrl}/music/music_files`;
+    let url = `${this.props.baseUrl}/music/music_files`;
     return fetch(url, {
       method: "GET",
       headers: {
@@ -49,7 +49,7 @@ class DeleteButton extends Component {
   };
 
   deleteFile = () => {
-    let url = `${this.baseUrl}/music/file?filename=${this.state.deleteFileName}`;
+    let url = `${this.props.baseUrl}/music/file?filename=${this.state.deleteFileName}`;
     // console.log(url);
     fetch(url, {
       method: "DELETE",

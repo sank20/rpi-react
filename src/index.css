@@ -35,35 +35,57 @@ code {
 
 .main-card {
   width: 58rem;
-  margin: auto;
+  margin: 2rem auto 2rem auto;
 }
 .card-body {
+  border-style: dashed;
+  border-width: 5px;
+  border-color: #ffed80;
   background-color: #222f5b;
   border-radius: 5px;
 }
-.card-parent {
-  /* background-color: aqua; */
-}
+
 h1 {
-  font-family: "HarryP";
+  font-family: "Lumos";
   text-align: center;
+  color: #740909;
+  margin-top: 24px;
+  padding-top: 24px;
 }
 label {
   font-size: larger;
   font-weight: 800;
-  font-family: Lumos;
+  /* font-family: Lumos; */
   padding: 2px 6px 2px 6px;
   margin: 0px 8px 0px 8px;
   font-weight: 500;
   color: #ffed80;
 }
 
-#myRange {
+#myRange,
+#danceSpeed {
   width: 50%;
 }
 .btn {
   color: #740909;
 }
-.custom-file{
+.custom-file {
   width: 50%;
+}
+
+canvas {
+  border: 1px solid black;
+}
+#percentage-symbol {
+  font-family: Lumos;
+}
+.camera-stream {
+  /* position: relative; */
+  /* top: 2px; */
+  /* left: 10.5em; */
+  height: 20em;
+}
+.navbar {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  padding: 0.5rem 0.5rem;
 }
