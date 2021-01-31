@@ -81,7 +81,7 @@ class DefaultMusicDropDown extends Component {
         //   minHeight: "200px",
         }}
       >
-        <DropdownButton id="dropdown-basic-button" title="Select Default Music">
+        <DropdownButton variant="info" id="dropdown-basic-button" title="Select Default Music">
           {this.state.musicList}
         </DropdownButton>
 

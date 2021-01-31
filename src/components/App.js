@@ -16,6 +16,8 @@ import NavBar from "./NavBar";
 import DefaultMusicDropDown from "./DefaultMusicDropDown";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
+import Dropdown from "react-bootstrap/Dropdown";
+import DropdownButton from "react-bootstrap/DropdownButton";
 class App extends Component {
   state = {
     fileDropDownList: [],
@@ -27,6 +29,8 @@ class App extends Component {
     danceSpeed: 50,
     danceDirection: 0,
     runSequentially: false,
+    musicList: null,
+    currentMusicLabel: "Select Music File",
   };
 
   deleteButtonLabel = "Select file to delete ->";
@@ -323,6 +327,49 @@ class App extends Component {
         console.log(err);
       });
   };
+  getMusicList = () => {
+    let url = `${this.baseUrl}/music/music_files`;
+    fetch(url, {
+      method: "GET",
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+      },
+    })
+      .then((response) => response.json())
+      .then((result) => {
+        const dropDownButtons = result.map((fileName, index) => {
+          return (
+            <Dropdown.Item key={index} onClick={this.setCurrentMusic(fileName)}>
+              {fileName}
+            </Dropdown.Item>
+          );
+        });
+        this.setState({
+          musicList: dropDownButtons,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  setCurrentMusic = (fileName) => (e) => {
+    let url = `${this.baseUrl}/music/select_file?filename=${fileName}`;
+    fetch(url, {
+      method: "PUT",
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+      },
+      // body: formData,
+    })
+      .then((result) => {})
+      .catch((err) => {
+        console.log(err);
+      });
+    this.setState({
+      currentMusicLabel: fileName,
+    });
+  };
   renderTooltip = (
     <Tooltip id="button-tooltip">
       This plays the current music only. If you changed the default music,
@@ -369,6 +416,14 @@ class App extends Component {
                         )}
                       </Button>
                     </OverlayTrigger>
+                    <DropdownButton
+                      variant="outline-warning"
+                      id="dropdown-basic-button"
+                      title={this.state.currentMusicLabel}
+                      onClick={this.getMusicList}
+                    >
+                      {this.state.musicList}
+                    </DropdownButton>
                     <Button
                       variant="outline-warning"
                       value={"stop"}
@@ -437,7 +492,7 @@ class App extends Component {
                     onChange={this.danceSwitch}
                   />
                 </Form.Group>
-                <Form.Group>
+                {/* <Form.Group>
                   <Form.Label>Dance Speed:</Form.Label>
                   <Form.Control
                     type="range"
@@ -454,7 +509,7 @@ class App extends Component {
                     {this.state.danceSpeed}{" "}
                     <span id="percentage-symbol">$</span>
                   </Form.Label>
-                </Form.Group>
+                </Form.Group> */}
                 <Form.Group>
                   <Form.Label>Dance Direction:</Form.Label>
 
@@ -465,15 +520,15 @@ class App extends Component {
                     id="directionGroup"
                     onChange={this.setDanceSettings}
                   >
-                    <ToggleButton value={1}>Clockwise</ToggleButton>
-                    <ToggleButton value={2}>Anticlockwise</ToggleButton>
+                    <ToggleButton className="toggle" variant="outline-light" value={1}>Clockwise</ToggleButton>
+                    <ToggleButton className="toggle" variant="outline-light" value={2}>Anticlockwise</ToggleButton>
                   </ToggleButtonGroup>
                 </Form.Group>
                 <Form.Group>
                   <Button
                     // type="switch"
                     id="ring-switch"
-                    variant="info "
+                    variant="info"
                     onClick={this.ringSwitch}
                   >
                     Mystery Box (ring)

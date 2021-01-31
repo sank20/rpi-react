@@ -46,7 +46,7 @@ class CameraViewDialog extends Component {
   render() {
     return (
       <>
-        <Button onClick={this.openModal}>Show Camera-View</Button>
+        <Button variant="info" onClick={this.openModal}>Show Camera-View</Button>
         <Modal
           size="lg"
           show={this.state.showModal}
